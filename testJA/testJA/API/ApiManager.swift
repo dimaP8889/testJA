@@ -94,10 +94,9 @@ class ApiManager<RQ : Requestable> {
         
         guard 200..<300 ~= code else {
             do {
-                let errorsStruct = try JSONDecoder().decode(type, from: _data)
                 return completion(
                     .failure(
-                        .badHTTPCode(errorsStruct.errors.map { $0.message }.joined())
+                        .badHTTPCode(try JSONDecoder().decode(type, from: _data))
                     )
                 )
             } catch (let decodeError) {
@@ -135,14 +134,7 @@ extension ApiManager where RQ : Requestable {
         case .success(let data):
             return data
         case .failure(let apiError):
-            
-            switch apiError {
-                
-            case .badHTTPCode(let error):
-                presentAlert(with: error)
-            default:
-                presentAlert(with: apiError.debugDescription)
-            }
+            presentAlert(with: apiError.debugDescription)
             return nil
         case .none:
             fatalError()
@@ -175,7 +167,7 @@ extension ApiManager where RQ == ApiEchoPresence {
         
         let model : TextResponse? = sync(request: .text)
         
-        return (model?.data[""] ?? "")
+        return model?.data ?? ""
     }
 }
 
@@ -200,6 +192,8 @@ enum APIError: Error, CustomDebugStringConvertible {
             return error.localizedDescription
         case .onRequestExecute(let error):
             return error.localizedDescription
+        case .badHTTPCode(let errorsStruct):
+            return errorsStruct.errors.map { $0.message }.joined()
         default:
             return "Request Error"
         }
@@ -208,7 +202,7 @@ enum APIError: Error, CustomDebugStringConvertible {
     case onRequestCreation
     case onRequestExecute(Error)
     case missingHTTPCode
-    case badHTTPCode(String)
+    case badHTTPCode(Errorable)
     case missingData
     case jsonMappingFailed(Error)
 }
