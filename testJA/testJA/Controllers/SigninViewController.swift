@@ -20,10 +20,15 @@ class SigninViewController: UIViewController {
             let name = nameField.text else { return }
         
         DispatchQueue.global(qos: .background).async {
-            Networking.apiEchoPresence.signin(name: name,
+            if Networking.apiEchoPresence.signin(name: name,
                                               email: email,
-                                              password: password)
-            print(ApiEchoPresence.authToken)
+                                              password: password) {
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "ParserSegue", sender: nil)
+                }
+            }
+            
         }
     }
     

@@ -19,9 +19,13 @@ class LoginViewController: UIViewController {
             let password = passwordField.text else { return }
         
         DispatchQueue.global(qos: .background).async {
-            Networking.apiEchoPresence.login(email: email,
-                                             password: password)
-            print(ApiEchoPresence.authToken)
+            if Networking.apiEchoPresence.login(email: email,
+                                                password: password) {
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "ParserSegue", sender: nil)
+                }
+            }
         }
     }
     
