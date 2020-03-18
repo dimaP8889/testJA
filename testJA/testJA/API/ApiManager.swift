@@ -25,7 +25,7 @@ class ApiManager<RQ : Requestable> {
         self.base = _base
     }
     
-    func dataTask<T : Decodable>(for request: RQ, type: T.Type, completion : @escaping (APIResult<T>) -> Void) -> URLSessionDataTask {
+    func dataTask<T : Errorable>(for request: RQ, type: T.Type, completion : @escaping (APIResult<T>) -> Void) -> URLSessionDataTask {
         
         var urlRequest = request.urlRequest(base)
         
@@ -34,7 +34,7 @@ class ApiManager<RQ : Requestable> {
         urlRequest.httpMethod = request.httpMethod()
         
         let task = session.dataTask(with: urlRequest) { [unowned self] (data, response, error) in
-            self.responseIsOK(data, response, error) { (result) in
+            self.responseIsOK(data, response, error, type: type) { (result) in
                 
                 switch result {
                     
@@ -61,10 +61,11 @@ class ApiManager<RQ : Requestable> {
         return task
     }
     
-    private func responseIsOK(
+    private func responseIsOK<T : Errorable>(
         _ data: Data?,
         _ response: URLResponse?,
         _ error: Error?,
+        type: T.Type,
         completion: @escaping (APIResult<Data>)->()
     ) {
         guard error == nil else {
@@ -83,20 +84,28 @@ class ApiManager<RQ : Requestable> {
             )
         }
         
-        guard 200..<300 ~= code else {
-            return completion(
-                .failure(
-                    .badHTTPCode(code)
-                )
-            )
-        }
-        
         guard let _data = data else {
             return completion(
                 .failure(
                     .missingData
                 )
             )
+        }
+        
+        guard 200..<300 ~= code else {
+            do {
+                let errorsStruct = try JSONDecoder().decode(type, from: _data)
+                return completion(
+                    .failure(
+                        .badHTTPCode(errorsStruct.errors.map { $0.message }.joined())
+                    )
+                )
+            } catch (let decodeError) {
+                
+                return completion(
+                    .failure(.jsonMappingFailed(decodeError))
+                )
+            }
         }
         
         completion(
@@ -107,7 +116,7 @@ class ApiManager<RQ : Requestable> {
 
 extension ApiManager where RQ : Requestable {
     
-    func sync<T : Decodable>(request: RQ) -> T? {
+    func sync<T : Errorable>(request: RQ) -> T? {
         
         var result : APIResult<T>!
         let group = DispatchGroup()
@@ -126,7 +135,14 @@ extension ApiManager where RQ : Requestable {
         case .success(let data):
             return data
         case .failure(let apiError):
-            presentAlert(with: apiError.localizedDescription)
+            
+            switch apiError {
+                
+            case .badHTTPCode(let error):
+                presentAlert(with: error)
+            default:
+                presentAlert(with: apiError.debugDescription)
+            }
             return nil
         case .none:
             fatalError()
@@ -158,7 +174,8 @@ extension ApiManager where RQ == ApiEchoPresence {
     func getText() -> String {
         
         let model : TextResponse? = sync(request: .text)
-        return model?.data ?? ""
+        
+        return (model?.data[""] ?? "")
     }
 }
 
@@ -170,12 +187,28 @@ enum APIResult<T> {
     case failure(APIError)
 }
 
-enum APIError: Error {
+enum APIError: Error, CustomDebugStringConvertible {
+    
+    var debugDescription: String {
+        
+        switch self {
+        case .missingHTTPCode:
+            return "Missing HTTP Code"
+        case .missingData:
+            return "Missing Data"
+        case .jsonMappingFailed(let error):
+            return error.localizedDescription
+        case .onRequestExecute(let error):
+            return error.localizedDescription
+        default:
+            return "Request Error"
+        }
+    }
     
     case onRequestCreation
     case onRequestExecute(Error)
     case missingHTTPCode
-    case badHTTPCode(Int)
+    case badHTTPCode(String)
     case missingData
     case jsonMappingFailed(Error)
 }

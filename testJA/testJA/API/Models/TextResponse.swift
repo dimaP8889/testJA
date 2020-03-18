@@ -8,9 +8,11 @@
 
 import Foundation
 
-struct TextResponse : Decodable {
+struct TextResponse : Errorable {
     
     let success : Bool
-    let data : String
-    let errors : [String]
+    let data : [String : String]
+    let successData : String
+    let errors : [ErrorResponse]
+    
 }

@@ -73,7 +73,7 @@ extension ApiEchoPresence : Requestable {
         
         switch self {
         case .signin:
-            return "signin/"
+            return "signup/"
         case .login:
             return "login/"
         case .text:

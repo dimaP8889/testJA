@@ -13,10 +13,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        Networking.apiEchoPresence.login(email: "test@test.test", password: "testtest123T")
+        print(Networking.apiEchoPresence.login(email: "lolo123456@123lolo.lol", password: "lololololo"))
         print(Networking.apiEchoPresence.getText())
     }
-
-
 }
 

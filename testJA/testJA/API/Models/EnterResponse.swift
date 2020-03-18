@@ -8,9 +8,19 @@
 
 import Foundation
 
-struct EnterResponse : Decodable {
+protocol Errorable : Decodable {
+    
+    var errors : [ErrorResponse] { get }
+}
+
+struct EnterResponse : Errorable {
     
     let success : Bool
     let data : EnterData
-    let errors : [String]
+    let errors : [ErrorResponse]
+}
+
+struct ErrorResponse : Decodable {
+    
+    let message : String
 }
