@@ -18,13 +18,14 @@
 		2C3C7989242233F1001AB87C /* EnterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C7988242233F1001AB87C /* EnterData.swift */; };
 		2C3C798B2422356D001AB87C /* TextResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C798A2422356D001AB87C /* TextResponse.swift */; };
 		2C3C798D24224A48001AB87C /* ApiEchoPresence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C798C24224A48001AB87C /* ApiEchoPresence.swift */; };
-		2C3C798E24224ABB001AB87C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C796B24221E6C001AB87C /* ViewController.swift */; };
+		2C3C798E24224ABB001AB87C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C796B24221E6C001AB87C /* LoginViewController.swift */; };
+		2C3C79902422C1A5001AB87C /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C798F2422C1A5001AB87C /* SigninViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C3C796424221E6C001AB87C /* testJA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testJA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C3C796724221E6C001AB87C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2C3C796B24221E6C001AB87C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2C3C796B24221E6C001AB87C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2C3C796E24221E6C001AB87C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C3C797024221E6E001AB87C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C3C797324221E6E001AB87C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +37,7 @@
 		2C3C7988242233F1001AB87C /* EnterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterData.swift; sourceTree = "<group>"; };
 		2C3C798A2422356D001AB87C /* TextResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextResponse.swift; sourceTree = "<group>"; };
 		2C3C798C24224A48001AB87C /* ApiEchoPresence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEchoPresence.swift; sourceTree = "<group>"; };
+		2C3C798F2422C1A5001AB87C /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +104,8 @@
 		2C3C797D24221ECB001AB87C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2C3C796B24221E6C001AB87C /* ViewController.swift */,
+				2C3C796B24221E6C001AB87C /* LoginViewController.swift */,
+				2C3C798F2422C1A5001AB87C /* SigninViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -199,9 +202,10 @@
 				2C3C798724223083001AB87C /* EnterResponse.swift in Sources */,
 				2C3C798B2422356D001AB87C /* TextResponse.swift in Sources */,
 				2C3C7989242233F1001AB87C /* EnterData.swift in Sources */,
-				2C3C798E24224ABB001AB87C /* ViewController.swift in Sources */,
+				2C3C798E24224ABB001AB87C /* LoginViewController.swift in Sources */,
 				2C3C7984242221AE001AB87C /* ErrorAlert.swift in Sources */,
 				2C3C798124221FAB001AB87C /* Requestable.swift in Sources */,
+				2C3C79902422C1A5001AB87C /* SigninViewController.swift in Sources */,
 				2C3C797F24221EEC001AB87C /* ApiManager.swift in Sources */,
 				2C3C796824221E6C001AB87C /* AppDelegate.swift in Sources */,
 				2C3C798D24224A48001AB87C /* ApiEchoPresence.swift in Sources */,
@@ -351,6 +355,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 452NG5983H;
 				INFOPLIST_FILE = testJA/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -369,6 +374,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 452NG5983H;
 				INFOPLIST_FILE = testJA/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
