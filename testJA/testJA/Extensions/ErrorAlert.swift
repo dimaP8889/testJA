@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import SVProgressHUD
 
 protocol ErrorAlert {
     
@@ -20,7 +19,6 @@ extension ErrorAlert {
         
         DispatchQueue.main.async {
             
-            //SVProgressHUD.dismiss()
             let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             let alertButton = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             

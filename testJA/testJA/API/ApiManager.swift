@@ -193,7 +193,7 @@ enum APIError: Error, CustomDebugStringConvertible {
         case .onRequestExecute(let error):
             return error.localizedDescription
         case .badHTTPCode(let errorsStruct):
-            return errorsStruct.errors.map { $0.message }.joined()
+            return errorsStruct.errors.map { $0.message + "\n" }.joined()
         default:
             return "Request Error"
         }
