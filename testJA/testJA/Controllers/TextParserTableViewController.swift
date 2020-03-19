@@ -10,7 +10,16 @@ import UIKit
 
 class TextParserTableViewController : UITableViewController {
     
-    lazy var headerView : UIButton = {
+    private var model : [(key: Character, value: Int)] = [] {
+        
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    private lazy var headerView : UIButton = {
         
         let button = UIButton()
         
@@ -38,9 +47,39 @@ class TextParserTableViewController : UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
     }
     
+    @IBAction func logOutPressed(_ sender: Any) {
+        
+        ApiEchoPresence.authToken = nil
+        performSegue(withIdentifier: "LogInSegue", sender: self)
+    }
+    
     @objc func generatePressed() {
         
-        print("Generate Pressed")
+        DispatchQueue.global(qos: .background).async {
+            
+            let string = Networking.apiEchoPresence.getText()
+            print(string)
+            self.parseResult(for: string)
+        }
+    }
+}
+
+extension TextParserTableViewController {
+    
+    func parseResult(for string: String) {
+        
+        var newModel : [Character : Int] = [:]
+        
+        string.forEach { (char) in
+            
+            if newModel[char] != nil {
+                newModel[char]! += 1
+            } else {
+                newModel[char] = 1
+            }
+        }
+        
+        model = newModel.sorted { $0.value < $1.value }
     }
 }
 
@@ -49,8 +88,12 @@ extension TextParserTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+        let info = model[indexPath.row]
         
-        cell.textLabel?.text = "lol"
+        cell.textLabel?.text = """
+        Character '\(info.key)' appears \(info.value) \(info.value > 1 ? "times" : "time")
+        """
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -66,7 +109,7 @@ extension TextParserTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return model.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

@@ -13,7 +13,7 @@ final class Networking {
     static let apiEchoPresence = ApiManager<ApiEchoPresence>(base: "https://apiecho.cf/")!
 }
 
-class ApiManager<RQ : Requestable> {
+final class ApiManager<RQ : Requestable> {
     
     let base : URL
     var session = URLSession(configuration: .default)

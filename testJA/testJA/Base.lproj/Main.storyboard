@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZbU-UM-gHi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ya8-RT-1e5">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -106,7 +106,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fk3-9z-c7T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="82.366071428571431"/>
+            <point key="canvasLocation" x="-729" y="82"/>
         </scene>
         <!--Log In-->
         <scene sceneID="ef6-Xp-1uZ">
@@ -186,7 +186,7 @@
         <!--Navigation Controller-->
         <scene sceneID="sSJ-r6-hYU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZbU-UM-gHi" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ParserVC" automaticallyAdjustsScrollViewInsets="NO" id="ZbU-UM-gHi" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="UAg-ir-P0U">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -219,7 +219,16 @@
                             <outlet property="delegate" destination="p85-3c-jWb" id="gVu-42-QRi"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Text Parser" id="C5U-pc-01Y"/>
+                    <navigationItem key="navigationItem" title="Text Parser" id="C5U-pc-01Y">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="HqV-1b-6K1">
+                            <connections>
+                                <action selector="logOutPressed:" destination="p85-3c-jWb" id="AZ7-KB-oDl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="ya8-RT-1e5" kind="presentation" identifier="LogInSegue" modalPresentationStyle="fullScreen" id="QOC-wM-gBF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcP-2X-HV4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

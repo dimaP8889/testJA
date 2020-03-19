@@ -10,7 +10,11 @@ import Foundation
 
 enum ApiEchoPresence {
     
-    static var authToken : String?
+    static var authToken : String? {
+        
+        get { return UserDefaults.standard.string(forKey: "AuthToken") }
+        set { UserDefaults.standard.set(newValue, forKey: "AuthToken") }
+    }
     
     case login(email: String, password: String)
     case signin(name : String, email: String, password: String)
@@ -41,6 +45,16 @@ extension ApiEchoPresence : Requestable {
         
         let data = try? JSONSerialization.data(withJSONObject: json)
         return data
+    }
+    
+    func parameters() -> [String : String] {
+        switch self {
+            
+        case .text:
+            return ["lkjgiyocale" : "[sr_Cyrl_RS]"]
+        default:
+            return [:]
+        }
     }
     
     func httpMethod() -> String {

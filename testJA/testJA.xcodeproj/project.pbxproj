@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C3C796824221E6C001AB87C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C796724221E6C001AB87C /* AppDelegate.swift */; };
 		2C3C796F24221E6C001AB87C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C3C796D24221E6C001AB87C /* Main.storyboard */; };
 		2C3C797124221E6E001AB87C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C3C797024221E6E001AB87C /* Assets.xcassets */; };
 		2C3C797424221E6E001AB87C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C3C797224221E6E001AB87C /* LaunchScreen.storyboard */; };
@@ -21,6 +20,7 @@
 		2C3C798E24224ABB001AB87C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C796B24221E6C001AB87C /* LoginViewController.swift */; };
 		2C3C79902422C1A5001AB87C /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C798F2422C1A5001AB87C /* SigninViewController.swift */; };
 		2C3C79922422CEFB001AB87C /* TextParserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C79912422CEFB001AB87C /* TextParserTableViewController.swift */; };
+		2C3C799324237AD6001AB87C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3C796724221E6C001AB87C /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -202,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C3C799324237AD6001AB87C /* AppDelegate.swift in Sources */,
 				2C3C798724223083001AB87C /* EnterResponse.swift in Sources */,
 				2C3C798B2422356D001AB87C /* TextResponse.swift in Sources */,
 				2C3C7989242233F1001AB87C /* EnterData.swift in Sources */,
@@ -211,7 +212,6 @@
 				2C3C798124221FAB001AB87C /* Requestable.swift in Sources */,
 				2C3C79902422C1A5001AB87C /* SigninViewController.swift in Sources */,
 				2C3C797F24221EEC001AB87C /* ApiManager.swift in Sources */,
-				2C3C796824221E6C001AB87C /* AppDelegate.swift in Sources */,
 				2C3C798D24224A48001AB87C /* ApiEchoPresence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
