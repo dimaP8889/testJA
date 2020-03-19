@@ -58,7 +58,6 @@ class TextParserTableViewController : UITableViewController {
         DispatchQueue.global(qos: .background).async {
             
             let string = Networking.apiEchoPresence.getText()
-            print(string)
             self.parseResult(for: string)
         }
     }

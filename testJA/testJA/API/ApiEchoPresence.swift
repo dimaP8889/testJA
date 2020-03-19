@@ -47,16 +47,6 @@ extension ApiEchoPresence : Requestable {
         return data
     }
     
-    func parameters() -> [String : String] {
-        switch self {
-            
-        case .text:
-            return ["lkjgiyocale" : "[sr_Cyrl_RS]"]
-        default:
-            return [:]
-        }
-    }
-    
     func httpMethod() -> String {
         
         switch self {
