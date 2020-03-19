@@ -26,6 +26,7 @@ class TextParserTableViewController : UITableViewController {
         button.setTitle("Generate Text", for: .normal)
         button.titleLabel?.font = UIFont(name: "TimesNewRoman", size: 17)
         button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.gray, for: .highlighted)
         button.backgroundColor = .white
         
         button.layer.cornerRadius = 8
